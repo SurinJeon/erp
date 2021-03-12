@@ -30,13 +30,12 @@ dependencies {
 }
 
 
-jar { // 이후에 Gradle Tasks에서 build 하면 jar파일로 만들어짐
+jar { 
     version = 1.0
-    mainClassName= 'erp.Erp' // main()이 있는 class를 가져와야함
-    baseName= 'Erp'
+    mainClassName= 'erp.TestPanelFrame' 
+    baseName= 'TestPanelFrame'
     appendix = 'bin'
-    
-    // 위에 설정한 변수들을 manifest에서 씀 
+
     manifest{
         attributes 'Title': baseName, 'Version': version, 'Main-Class': mainClassName
     }
