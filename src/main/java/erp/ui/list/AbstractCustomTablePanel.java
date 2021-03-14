@@ -40,6 +40,7 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	}
 	
 	public abstract void initList(); // 하위에서 overriding해라 
+	
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -56,7 +57,7 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	public T getItem() {
 		int idx = table.getSelectedRow(); // 몇번째 행이 선택되었는가?
 		
-		System.out.println("idx >> " + idx); // 만약 아무 행도 선택되지 않았다면 -1을 return함
+//		System.out.println("idx >> " + idx); // 만약 아무 행도 선택되지 않았다면 -1을 return함
 		
 		// 예외처리
 		if (idx == -1) {
@@ -81,13 +82,18 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	
 	public void setList() {
 		// setList는 다른 타입이 오는 toArray만 추상으로 해서 setList의 바디로 가져옴
+		
+		// 1. 2차원 배열에 값 다 집어넣기
 		Object[][] data = new Object[list.size()][];
 
 		for (int i = 0; i < data.length; i++) {
 			data[i] = toArray(list.get(i));
 		}
 		
+		// 2. model에 배열 값을 집어넣기
 		CustomTableModel model = new CustomTableModel(data, getColumnNames());
+		
+		// 3. table에 model setting
 		table.setModel(model);
 		
 		// 정렬 되게 하는 부분
@@ -99,6 +105,7 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	}
 	
 	protected abstract void setAlignAndWidth();
+	
 	public void setTableCellAlign(int align, int...idx) {
 		// 컬럼 내용 정렬
 			TableColumnModel tcm = table.getColumnModel(); // table의 각 column을 갖고오기 위함
@@ -106,7 +113,7 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 			dtcr.setHorizontalAlignment(align);
 			
 			for (int i = 0; i < idx.length; i++) {
-				tcm.getColumn(idx[i]).setCellRenderer(dtcr);;
+				tcm.getColumn(idx[i]).setCellRenderer(dtcr);
 			}
 		}
 	
