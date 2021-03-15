@@ -14,6 +14,7 @@ import erp.dao.ui.DepartmentManager;
 import erp.dao.ui.EmployeeManager;
 import erp.dao.ui.TitleManager;
 
+@SuppressWarnings("serial")
 public class TestPanelFrame extends JFrame implements ActionListener {
 
 	private JPanel contentPane;

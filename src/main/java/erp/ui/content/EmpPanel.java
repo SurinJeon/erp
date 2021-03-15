@@ -52,15 +52,16 @@ public class EmpPanel extends JPanel implements ItemListener{
 		// 이제 모델을 콤보박스에 달아주기
 		cmbDept.setModel(deptModel);
 		
+		
 		List<Title> titleList = service.showTitleList();
 		DefaultComboBoxModel<Title> titleModel = new DefaultComboBoxModel<Title>(new Vector<>(titleList));
 		cmbTitle.setModel(titleModel);
 
 		System.out.println(cmbDept.getSelectedItem());
-//		
-//		List<Employee> managerList = service.showEmployeesByDept(new Department(cmbDept.getSelectedIndex()));
-//		DefaultComboBoxModel<Employee> managerModel = new DefaultComboBoxModel<Employee>(new Vector<>(managerList));
-//		cmbManager.setModel(managerModel);
+		
+		List<Employee> managerList = service.showEmployeesByDept(new Department(cmbDept.getSelectedIndex()));
+		DefaultComboBoxModel<Employee> managerModel = new DefaultComboBoxModel<Employee>(new Vector<>(managerList));
+		cmbManager.setModel(managerModel);
 		
 		// 처음에 켰을 때 아무것도 선택되어있지 않게 만듦
 //		cmbDept.getSelectedItem(0);
@@ -129,45 +130,65 @@ public class EmpPanel extends JPanel implements ItemListener{
 		pItem.add(spinSalary);
 	}
 
-	public void setEmployee(Employee employee) {
-	// public Employee(int empNo, String empName,
-	// Title title, Employee manager, int salary, Department dept)
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cmbDept) {
+			itemStateChangedCmbDept(e);
+		}
+	}
+
+	protected void itemStateChangedCmbDept(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			Department dept = (Department) cmbDept.getSelectedItem();
+			List<Employee> managerList = service.showEmployeesByDept(dept);
+
+			if (managerList == null) {
+				managerList = new ArrayList<Employee>();
+//				JOptionPane.showMessageDialog(null, "해당 부서 사원이 없습니다");
+			}
+
+			DefaultComboBoxModel<Employee> managerModel = new DefaultComboBoxModel<Employee>(new Vector<>(managerList));
+			cmbManager.setModel(managerModel);
+			cmbManager.setSelectedIndex(-1);
+
+		}
+	}
+
+	public void setEmployee(Employee item) {
 		
-		tfNo.setText(employee.getEmpNo() + "");
-		tfName.setText(employee.getEmpName());
-		cmbDept.setSelectedItem(employee.getDept()); // equals를 해줘야 일치하는걸 선택할 수 있음
-		cmbManager.setSelectedItem(employee.getManager());
-		cmbTitle.setSelectedItem(employee.getTitle());
-		spinSalary.setValue(employee.getSalary());
-		
-		
+		tfNo.setText(item.getEmpNo() + "");
+		tfName.setText(item.getEmpName());
+		cmbDept.setSelectedItem(item.getDept()); // equals를 해줘야 일치하는걸 선택할 수 있음
+		cmbManager.setSelectedItem(item.getManager());
+		cmbTitle.setSelectedItem(item.getTitle());
+		spinSalary.setValue(item.getSalary());
 		
 	}
-	
+
 	public Employee getEmployee() {
-		
 		validCheck();
 		int empNo = Integer.parseInt(tfNo.getText().trim());
 		String empName = tfName.getText().trim();
-		
+
 		// 위에서 제네릭 안했다면 여기서 좀 일이 많아짐
 		Title title = (Title) cmbTitle.getSelectedItem();
 		Employee manager = (Employee) cmbManager.getSelectedItem();
 		int salary = (int) spinSalary.getValue();
 		Department dept = (Department) cmbDept.getSelectedItem();
-		
+
 		return new Employee(empNo, empName, title, manager, salary, dept);
 	}
-	
-	private void validCheck() {
-		if(tfNo.getText().trim().contentEquals("")|| tfName.getText().contentEquals("")) {
+
+	public void validCheck() {
+		if (tfNo.getText().trim().contentEquals("") || tfName.getText().contentEquals("")) {
 			throw new InvalidCheckException();
 		}
-		
-		if(cmbDept.getSelectedIndex() == -1 || cmbManager.getSelectedIndex() == -1 || cmbTitle.getSelectedIndex() == -1) {
+
+		if (cmbDept.getSelectedIndex() == -1 || cmbManager.getSelectedIndex() == -1
+				|| cmbTitle.getSelectedIndex() == -1) {
 			System.out.println("콤보박스찍힘");
 			throw new InvalidCheckException();
 		}
+
 	}
 
 	public void clearTf() {
@@ -177,30 +198,8 @@ public class EmpPanel extends JPanel implements ItemListener{
 		cmbManager.setSelectedIndex(-1);
 		cmbTitle.setSelectedIndex(-1);
 		spinSalary.setValue(2000000);
-		
-	}
-	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == cmbDept) {
-			itemStateChangedCmbDept(e);
-		}
-	}
-	protected void itemStateChangedCmbDept(ItemEvent e) {
-		if(e.getStateChange() == ItemEvent.SELECTED) {
-			Department dept = (Department) cmbDept.getSelectedItem();
-			List<Employee> managerList = service.showEmployeesByDept(dept);
-			
-			if(managerList == null) {
-				managerList = new ArrayList<Employee>();
-//				JOptionPane.showMessageDialog(null, "해당 부서 사원이 없습니다");
-			}
 
-			DefaultComboBoxModel<Employee> managerModel = new DefaultComboBoxModel<Employee>(new Vector<>(managerList));
-			cmbManager.setModel(managerModel);
-			cmbManager.setSelectedIndex(-1);
-		
-		} 
 	}
-
 	
 }
 

@@ -15,7 +15,9 @@ import erp.dto.Employee;
 import erp.dto.Title;
 import erp.service.EmployeeService;
 import erp.ui.content.EmpPanel;
+import erp.ui.content.InterfaceItem;
 import erp.ui.exception.InvalidCheckException;
+import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.EmployeeTablePanel;
 
 @SuppressWarnings("serial")
@@ -25,7 +27,7 @@ public class EmployeeManager extends JFrame implements ActionListener {
 	private JButton btnAdd;
 	private JButton btnCancel;
 	private JButton btnSet;
-	private EmpPanel pEmpItem;
+	private EmpPanel pEmp;
 	private EmployeeTablePanel pList;
 	private EmployeeService service;
 	
@@ -44,9 +46,9 @@ public class EmployeeManager extends JFrame implements ActionListener {
 		
 		EmployeeService service = new EmployeeService();
 		
-		pEmpItem = new EmpPanel(); // 여기까지하면 이미 constructor 호출까지 끝남
-		pEmpItem.setService(service); // setService() 호출하면서 그 밑에 list도 세팅해주도록 코드 짬
-		contentPane.add(pEmpItem);
+		pEmp = new EmpPanel(); // 여기까지하면 이미 constructor 호출까지 끝남
+		pEmp.setService(service); // setService() 호출하면서 그 밑에 list도 세팅해주도록 코드 짬
+		contentPane.add(pEmp);
 		
 		JPanel pBtns = new JPanel();
 		contentPane.add(pBtns);
@@ -79,13 +81,13 @@ public class EmployeeManager extends JFrame implements ActionListener {
 		if (e.getSource() == btnAdd) {
 			actionPerformedBtnAdd(e);
 			pList.loadData();
-			pEmpItem.clearTf();
+			pEmp.clearTf();
 		}
 	}
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		Employee emp = null;
 		try {
-		emp = pEmpItem.getEmployee();
+		emp = pEmp.getEmployee();
 
 		String message = String.format("사원번호 : %d%n사원명 : %s%n부서 : %s%n직속상사 : %s%n직책 : %s%n급여 : %d%n",
 				emp.getEmpNo(),
@@ -106,12 +108,12 @@ public class EmployeeManager extends JFrame implements ActionListener {
 	}
 	
 	protected void actionPerformedBtnCancel(ActionEvent e) {
-		pEmpItem.clearTf();
+		pEmp.clearTf();
 	}
 	
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		Employee emp = new Employee(1003, "조민희", new Title(3), new Employee(4377), 3000000, new Department(2));
-		pEmpItem.setEmployee(emp);
+		pEmp.setEmployee(emp);
 		
 		
 	}

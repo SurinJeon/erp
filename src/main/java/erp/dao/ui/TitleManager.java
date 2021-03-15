@@ -172,12 +172,3 @@ public class TitleManager extends JFrame implements ActionListener {
 		pContent.clearTf();
 	}
 }
-
-
-
-
-
-
-
-
-
