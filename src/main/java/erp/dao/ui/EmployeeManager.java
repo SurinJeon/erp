@@ -1,6 +1,5 @@
-package erp;
+package erp.dao.ui;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,7 +19,7 @@ import erp.ui.exception.InvalidCheckException;
 import erp.ui.list.EmployeeTablePanel;
 
 @SuppressWarnings("serial")
-public class TestFrame extends JFrame implements ActionListener {
+public class EmployeeManager extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JButton btnAdd;
@@ -30,25 +29,12 @@ public class TestFrame extends JFrame implements ActionListener {
 	private EmployeeTablePanel pList;
 	private EmployeeService service;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TestFrame frame = new TestFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	public TestFrame() {
+	public EmployeeManager() {
 		initialize();
 		service = new EmployeeService();
 	}
 	private void initialize() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -116,7 +102,6 @@ public class TestFrame extends JFrame implements ActionListener {
 		}
 
 		service.addEmployee(emp);
-		
 		
 	}
 	
