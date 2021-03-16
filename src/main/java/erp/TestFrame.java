@@ -99,7 +99,7 @@ public class TestFrame extends JFrame implements ActionListener {
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		Employee emp = null;
 		try {
-		emp = pEmpItem.getEmployee();
+		emp = pEmpItem.getItem();
 
 		String message = String.format("사원번호 : %d%n사원명 : %s%n부서 : %s%n직속상사 : %s%n직책 : %s%n급여 : %d%n",
 				emp.getEmpNo(),
@@ -126,7 +126,7 @@ public class TestFrame extends JFrame implements ActionListener {
 	
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		Employee emp = new Employee(1003, "조민희", new Title(3), new Employee(4377), 3000000, new Department(2));
-		pEmpItem.setEmployee(emp);
+		pEmpItem.setItem(emp);
 		
 		
 	}

@@ -136,7 +136,10 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 		} catch (SqlConstraintException e2) {
 			JOptionPane.showMessageDialog(null, e2.getMessage());
 			pContent.clearTf();
+		} catch (UnsupportedOperationException e2) {
+			JOptionPane.showMessageDialog(null, e2.getMessage());
 		}
+		
 	}
 	
 
