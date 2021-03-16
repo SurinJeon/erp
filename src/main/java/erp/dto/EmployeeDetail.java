@@ -8,6 +8,7 @@ public class EmployeeDetail {
 	private int empNo;
 	private boolean gender;
 	private Date hireDate;
+	private String pass; // 비밀번호 추가
 	private byte[] pic; // << img는 0101이런식으로 저장되기 때문에 byte배열
 	
 	public EmployeeDetail() {
@@ -47,6 +48,14 @@ public class EmployeeDetail {
 
 	public void setHireDate(Date hireDate) {
 		this.hireDate = hireDate;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 	public byte[] getPic() {
