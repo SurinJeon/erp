@@ -3,22 +3,22 @@ package erp.dto;
 import java.util.Arrays;
 import java.util.Date;
 
-public class EmpDetail {
+public class EmployeeDetail {
 
 	private int empNo;
 	private boolean gender;
 	private Date hireDate;
 	private byte[] pic; // << img는 0101이런식으로 저장되기 때문에 byte배열
 	
-	public EmpDetail() {
+	public EmployeeDetail() {
 		super();
 	}
 	
-	public EmpDetail(int empNo) {
+	public EmployeeDetail(int empNo) {
 		this.empNo = empNo;
 	}
 
-	public EmpDetail(int empNo, boolean gender, Date hireDate, byte[] pic) {
+	public EmployeeDetail(int empNo, boolean gender, Date hireDate, byte[] pic) {
 		this.empNo = empNo;
 		this.gender = gender;
 		this.hireDate = hireDate;
