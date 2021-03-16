@@ -17,7 +17,7 @@ public class DepartmentPanel extends AbstractContentPanel<Department> {
 	private JTextField tfDeptName;
 	private JTextField tfFloor;
 
-	private DepartmentPanel() {
+	public DepartmentPanel() {
 
 		initialize();
 	}

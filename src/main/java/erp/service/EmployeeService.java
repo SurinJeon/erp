@@ -41,5 +41,13 @@ public class EmployeeService {
 	public void addEmployee(Employee employee){
 		dao.insertEmployee(employee);
 	}
+	
+	public void modifyEmployee(Employee employee) {
+		dao.updateEmployee(employee);
+	}
+	
+	public void removeEmployee(Employee employee) {
+		dao.deleteEmployee(employee);
+	}
 
 }

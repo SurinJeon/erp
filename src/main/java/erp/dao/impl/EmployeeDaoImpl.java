@@ -12,6 +12,7 @@ import erp.database.JdbcConn;
 import erp.dto.Department;
 import erp.dto.Employee;
 import erp.dto.Title;
+import erp.ui.exception.SqlConstraintException;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
@@ -124,9 +125,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			pstmt.setInt(6, employee.getDept().getDeptno());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SqlConstraintException(e.getMessage(), e);
 		}
-		return 0;
 	}
 
 	@Override

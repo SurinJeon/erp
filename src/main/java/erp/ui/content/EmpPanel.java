@@ -26,7 +26,7 @@ import erp.service.EmployeeService;
 import erp.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
-public class EmpPanel extends JPanel implements ItemListener{
+public class EmpPanel extends AbstractContentPanel<Employee> implements ItemListener{
 	private JTextField tfNo;
 	private JTextField tfName;
 	private JComboBox<Title> cmbTitle; // generic을 쓰지 않으면 일반적으로 String이 들어가게 됨...
@@ -37,7 +37,7 @@ public class EmpPanel extends JPanel implements ItemListener{
 	private EmployeeService service; // TestFrame에서 쓸 수 있도록 여기 적어줌
 	private JPanel pItem;
 	
-	private EmpPanel() {
+	public EmpPanel() {
 
 		initialize();
 	}
@@ -153,18 +153,44 @@ public class EmpPanel extends JPanel implements ItemListener{
 		}
 	}
 
-	public void setEmployee(Employee item) {
-		
+
+	@Override
+	public void validCheck() {
+		if (tfNo.getText().trim().contentEquals("") || tfName.getText().contentEquals("")) {
+			throw new InvalidCheckException();
+		}
+
+		if (cmbDept.getSelectedIndex() == -1 || cmbManager.getSelectedIndex() == -1
+				|| cmbTitle.getSelectedIndex() == -1) {
+			System.out.println("콤보박스찍힘");
+			throw new InvalidCheckException();
+		}
+
+	}
+	
+	@Override
+	public void clearTf() {
+		tfNo.setText("");
+		tfName.setText("");
+		cmbDept.setSelectedIndex(-1);
+		cmbManager.setSelectedIndex(-1);
+		cmbTitle.setSelectedIndex(-1);
+		spinSalary.setValue(2000000);
+
+	}
+
+	@Override
+	public void setItem(Employee item) {
 		tfNo.setText(item.getEmpNo() + "");
 		tfName.setText(item.getEmpName());
 		cmbDept.setSelectedItem(item.getDept()); // equals를 해줘야 일치하는걸 선택할 수 있음
 		cmbManager.setSelectedItem(item.getManager());
 		cmbTitle.setSelectedItem(item.getTitle());
-		spinSalary.setValue(item.getSalary());
-		
+		spinSalary.setValue(item.getSalary());		
 	}
 
-	public Employee getEmployee() {
+	@Override
+	public Employee getItem() {
 		validCheck();
 		int empNo = Integer.parseInt(tfNo.getText().trim());
 		String empName = tfName.getText().trim();
@@ -178,27 +204,8 @@ public class EmpPanel extends JPanel implements ItemListener{
 		return new Employee(empNo, empName, title, manager, salary, dept);
 	}
 
-	public void validCheck() {
-		if (tfNo.getText().trim().contentEquals("") || tfName.getText().contentEquals("")) {
-			throw new InvalidCheckException();
-		}
-
-		if (cmbDept.getSelectedIndex() == -1 || cmbManager.getSelectedIndex() == -1
-				|| cmbTitle.getSelectedIndex() == -1) {
-			System.out.println("콤보박스찍힘");
-			throw new InvalidCheckException();
-		}
-
-	}
-
-	public void clearTf() {
-		tfNo.setText("");
-		tfName.setText("");
-		cmbDept.setSelectedIndex(-1);
-		cmbManager.setSelectedIndex(-1);
-		cmbTitle.setSelectedIndex(-1);
-		spinSalary.setValue(2000000);
-
+	public JTextField getTfNo() {
+		return tfNo;
 	}
 	
 }

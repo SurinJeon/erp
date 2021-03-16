@@ -10,9 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import erp.dao.ui.DepartmentManager;
-import erp.dao.ui.EmployeeManager;
-import erp.dao.ui.TitleManager;
+import erp.ui.DepartmentManagerUI;
+import erp.ui.EmployeeManagerUI;
+import erp.ui.TitleManagerUI;
 
 @SuppressWarnings("serial")
 public class TestPanelFrame extends JFrame implements ActionListener {
@@ -77,15 +77,16 @@ public class TestPanelFrame extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnTitle(ActionEvent e) {
-		TitleManager frame = new TitleManager();
+		TitleManagerUI frame = new TitleManagerUI();
+		frame.setTitle("직책관리"); // 여기서 frame title setting
 		frame.setVisible(true);
 	}
 	protected void actionPerformedBtnDepartment(ActionEvent e) {
-		DepartmentManager frame = new DepartmentManager();
+		DepartmentManagerUI frame = new DepartmentManagerUI();
 		frame.setVisible(true);
 	}
 	protected void actionPerformedBtnEmployee(ActionEvent e) {
-		EmployeeManager frame = new EmployeeManager();
+		EmployeeManagerUI frame = new EmployeeManagerUI();
 		frame.setVisible(true);
 	}
 }

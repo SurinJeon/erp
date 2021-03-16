@@ -1,4 +1,4 @@
-package erp.dao.ui;
+package erp.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,8 +14,10 @@ import erp.dto.Department;
 import erp.dto.Employee;
 import erp.dto.Title;
 import erp.service.EmployeeService;
+import erp.ui.content.AbstractContentPanel;
 import erp.ui.content.EmpPanel;
 import erp.ui.exception.InvalidCheckException;
+import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.EmployeeTablePanel;
 
 @SuppressWarnings("serial")
@@ -25,8 +27,8 @@ public class EmployeeManager extends JFrame implements ActionListener {
 	private JButton btnAdd;
 	private JButton btnCancel;
 	private JButton btnSet;
-	private EmpPanel pEmp;
-	private EmployeeTablePanel pList;
+	private AbstractContentPanel<Employee> pEmp;
+	private AbstractCustomTablePanel<Employee> pList;
 	private EmployeeService service;
 	
 	public EmployeeManager() {
@@ -45,7 +47,7 @@ public class EmployeeManager extends JFrame implements ActionListener {
 		EmployeeService service = new EmployeeService();
 		
 		pEmp = new EmpPanel(); // 여기까지하면 이미 constructor 호출까지 끝남
-		pEmp.setService(service); // setService() 호출하면서 그 밑에 list도 세팅해주도록 코드 짬
+		((EmpPanel) pEmp).setService(service); // setService() 호출하면서 그 밑에 list도 세팅해주도록 코드 짬
 		contentPane.add(pEmp);
 		
 		JPanel pBtns = new JPanel();
@@ -64,7 +66,7 @@ public class EmployeeManager extends JFrame implements ActionListener {
 		pBtns.add(btnCancel);
 		
 		pList = new EmployeeTablePanel();
-		pList.setService(service);
+		((EmployeeTablePanel) pList).setService(service);
 		pList.loadData();
 		contentPane.add(pList);
 	}
@@ -85,7 +87,7 @@ public class EmployeeManager extends JFrame implements ActionListener {
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		Employee emp = null;
 		try {
-		emp = pEmp.getEmployee();
+		emp = pEmp.getItem();
 
 		String message = String.format("사원번호 : %d%n사원명 : %s%n부서 : %s%n직속상사 : %s%n직책 : %s%n급여 : %d%n",
 				emp.getEmpNo(),
@@ -111,7 +113,7 @@ public class EmployeeManager extends JFrame implements ActionListener {
 	
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		Employee emp = new Employee(1003, "조민희", new Title(3), new Employee(4377), 3000000, new Department(2));
-		pEmp.setEmployee(emp);
+		pEmp.setItem(emp);
 		
 		
 	}
