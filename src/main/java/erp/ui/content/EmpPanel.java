@@ -37,7 +37,7 @@ public class EmpPanel extends JPanel implements ItemListener{
 	private EmployeeService service; // TestFrame에서 쓸 수 있도록 여기 적어줌
 	private JPanel pItem;
 	
-	public EmpPanel() {
+	private EmpPanel() {
 
 		initialize();
 	}

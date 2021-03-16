@@ -15,9 +15,7 @@ import erp.dto.Employee;
 import erp.dto.Title;
 import erp.service.EmployeeService;
 import erp.ui.content.EmpPanel;
-import erp.ui.content.InterfaceItem;
 import erp.ui.exception.InvalidCheckException;
-import erp.ui.list.AbstractCustomTablePanel;
 import erp.ui.list.EmployeeTablePanel;
 
 @SuppressWarnings("serial")

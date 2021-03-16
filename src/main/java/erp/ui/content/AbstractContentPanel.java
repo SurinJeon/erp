@@ -2,12 +2,11 @@ package erp.ui.content;
 
 import javax.swing.JPanel;
 
-public abstract class InterfaceItem<T> extends JPanel{
+@SuppressWarnings("serial")
+public abstract class AbstractContentPanel<T> extends JPanel{
 	
-	public InterfaceItem() {
-		initialize();
+	public AbstractContentPanel() {
 	}
-	public abstract void initialize();
 	
 	// interface니까 public 어쩌고 생략되어서 안 써도 됨
 	public abstract void setItem(T item);

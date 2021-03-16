@@ -3,7 +3,6 @@ package erp.ui.content;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -13,12 +12,12 @@ import erp.ui.exception.InvalidCheckException;
 
 // 와꾸짜기
 @SuppressWarnings("serial")
-public class DepartmentPanel extends JPanel {
+public class DepartmentPanel extends AbstractContentPanel<Department> {
 	private JTextField tfDeptNo;
 	private JTextField tfDeptName;
 	private JTextField tfFloor;
 
-	public DepartmentPanel() {
+	private DepartmentPanel() {
 
 		initialize();
 	}
@@ -52,32 +51,7 @@ public class DepartmentPanel extends JPanel {
 		add(tfFloor);
 	}
 
-	// getter setter
-	public Department getDepartment() {
-		// 유효성 검사 추가 << 공백이 오면 추가되면 안됨
-		validCheck();
-		int deptno = Integer.parseInt(tfDeptNo.getText().trim());
-		String deptname = tfDeptName.getText().trim();
-		int floor = Integer.parseInt(tfFloor.getText().trim());
-
-		return new Department(deptno, deptname, floor);
-	}
-	
-
-	private void validCheck() {
-	
-		if (tfDeptNo.getText().contentEquals("") || tfDeptName.getText().equals("")) { // contentEquals나 equals 다 써도 됨
-			throw new InvalidCheckException();
-		}
-		
-	}
-
-	public void setDepartment(Department department) {
-		tfDeptNo.setText(department.getDeptno() + "");
-		tfDeptName.setText(department.getDeptname());
-		tfFloor.setText(department.getFloor() + "");
-	}
-
+	@Override
 	public void clearTf() {
 		tfDeptNo.setText("");
 		tfDeptName.setText("");
@@ -86,6 +60,33 @@ public class DepartmentPanel extends JPanel {
 
 	public JTextField getTfDeptNo() {
 		return tfDeptNo;
+	}
+
+	@Override
+	public void setItem(Department item) {
+		tfDeptNo.setText(item.getDeptno() + "");
+		tfDeptName.setText(item.getDeptname());
+		tfFloor.setText(item.getFloor() + "");		
+	}
+
+	@Override
+	public Department getItem() {
+		// 유효성 검사 추가 << 공백이 오면 추가되면 안됨
+		validCheck();
+		int deptno = Integer.parseInt(tfDeptNo.getText().trim());
+		String deptname = tfDeptName.getText().trim();
+		int floor = Integer.parseInt(tfFloor.getText().trim());
+
+		return new Department(deptno, deptname, floor);
+	}
+
+	@Override
+	public void validCheck() {
+		if (tfDeptNo.getText().contentEquals("") || tfDeptName.getText().equals("")) { // contentEquals나 equals 다 써도 됨
+			throw new InvalidCheckException();
+		}
+		
+		
 	}
 
 }
