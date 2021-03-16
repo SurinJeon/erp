@@ -2,8 +2,10 @@ package erp.ui.content;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,7 @@ import java.io.File;
 import java.util.Date;
 
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -29,6 +32,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.toedter.calendar.JDateChooser;
 
 import erp.dto.EmployeeDetail;
+import erp.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
 public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetail> implements ActionListener {
@@ -149,12 +153,17 @@ public class EmployeeDetailPanel extends AbstractContentPanel<EmployeeDetail> im
 
 	@Override
 	public void validCheck() {
-		// TODO Auto-generated method stub
+		if(lblConfirm.getText().contentEquals("일치")) {
+			
+		} else {
+			throw new InvalidCheckException();
+		}
 		
 	}
 
 	@Override
 	public void clearTf() {
+		lblPic.setIcon(new ImageIcon(imgPath + "noimage.jpg"));
 		dateHire.setDate(new Date(System.currentTimeMillis()));
 		rdbtnFemale.setSelected(true);
 		pfPass1.setText("");
