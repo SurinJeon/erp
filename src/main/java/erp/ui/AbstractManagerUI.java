@@ -30,6 +30,13 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 	
 	protected AbstractContentPanel<T> pContent;
 	protected AbstractCustomTablePanel<T> pList;
+	protected JMenuItem empListByTitleItem; // 아래에서 접근 가능해야하므로 private >> protected로 바꿈 
+	
+	// 동일직책사원보기 동일부서사원보기 사원상세정보 이런식으로 보이게 상수 선언!
+	protected static final String TITLE_MENU = "동일 직책 사원 보기";
+	protected static final String DEPT_MENU = "동일 부서 사원 보기";
+	protected static final String EMP_MENU = "사원 세부정보 보기";
+	
 	
 //	private TitleService service; // 하위 subclass가 생성해야함
 	
@@ -90,7 +97,7 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 		deleteItem.addActionListener(this);
 		popMenu.add(deleteItem);
 		
-		JMenuItem empListByTitleItem = new JMenuItem("동일 직책 사원 보기");
+		empListByTitleItem = new JMenuItem();
 		empListByTitleItem.addActionListener(this);
 		popMenu.add(empListByTitleItem);
 		
@@ -110,9 +117,13 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 					actionPerformedMenuUpdate();
 				}
 
-				if (e.getActionCommand().equals("동일 직책 사원 보기")) {
+				if (e.getActionCommand().equals(AbstractManagerUI.TITLE_MENU) ||
+						e.getActionCommand().equals(AbstractManagerUI.DEPT_MENU) ||
+						e.getActionCommand().equals(AbstractManagerUI.EMP_MENU)
+						) {
 					actionPerformedMenuCategory();
 				}
+					
 			} else {
 				/*btn 부분*/
 				if (e.getSource() == btnAdd) {

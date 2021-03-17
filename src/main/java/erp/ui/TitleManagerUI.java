@@ -19,6 +19,11 @@ public class TitleManagerUI extends AbstractManagerUI<Title> {
 	
 	private TitleService service;
 	
+	public TitleManagerUI() {
+		empListByTitleItem.setText(AbstractManagerUI.TITLE_MENU);
+	}
+
+	
 	@Override
 	protected void setService() {
 		service = new TitleService();

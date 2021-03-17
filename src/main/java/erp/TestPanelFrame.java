@@ -21,6 +21,9 @@ public class TestPanelFrame extends JFrame implements ActionListener {
 	private JButton btnTitle;
 	private JButton btnDepartment;
 	private JButton btnEmployee;
+	private TitleManagerUI titleFrame;
+	private DepartmentManagerUI deptFrame;
+	private EmployeeManagerUI empFrame;
 
 	/**
 	 * Launch the application.
@@ -42,7 +45,19 @@ public class TestPanelFrame extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public TestPanelFrame() {
+		createFrame(); // initialize 전에 frame을 만들어서 버튼 눌렀을 때 한 번만 뜨도록 만듦
 		initialize();
+	}
+
+	public void createFrame() {
+		titleFrame = new TitleManagerUI();
+		titleFrame.setTitle("직책관리"); // 여기서 frame title setting
+		
+		deptFrame = new DepartmentManagerUI();
+		deptFrame.setTitle("부서관리");
+		
+		empFrame = new EmployeeManagerUI();
+		empFrame.setTitle("사원관리");
 	}
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,16 +92,15 @@ public class TestPanelFrame extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnTitle(ActionEvent e) {
-		TitleManagerUI frame = new TitleManagerUI();
-		frame.setTitle("직책관리"); // 여기서 frame title setting
-		frame.setVisible(true);
+		
+		titleFrame.setVisible(true);
 	}
 	protected void actionPerformedBtnDepartment(ActionEvent e) {
-		DepartmentManagerUI frame = new DepartmentManagerUI();
-		frame.setVisible(true);
+	
+		deptFrame.setVisible(true);
 	}
 	protected void actionPerformedBtnEmployee(ActionEvent e) {
-		EmployeeManagerUI frame = new EmployeeManagerUI();
-		frame.setVisible(true);
+		
+		empFrame.setVisible(true);
 	}
 }
