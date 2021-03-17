@@ -15,7 +15,7 @@ import erp.ui.EmployeeManagerUI;
 import erp.ui.TitleManagerUI;
 
 @SuppressWarnings("serial")
-public class TestPanelFrame extends JFrame implements ActionListener {
+public class Main extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JButton btnTitle;
@@ -32,7 +32,7 @@ public class TestPanelFrame extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestPanelFrame frame = new TestPanelFrame();
+					Main frame = new Main();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class TestPanelFrame extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public TestPanelFrame() {
+	public Main() {
 		createFrame(); // initialize 전에 frame을 만들어서 버튼 눌렀을 때 한 번만 뜨도록 만듦
 		initialize();
 	}

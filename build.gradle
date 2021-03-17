@@ -32,8 +32,8 @@ dependencies {
 
 jar { 
     version = 1.0
-    mainClassName= 'erp.TestPanelFrame' 
-    baseName= 'TestPanelFrame'
+    mainClassName= 'erp.Main' 
+    baseName= 'Main'
     appendix = 'bin'
 
     manifest{
