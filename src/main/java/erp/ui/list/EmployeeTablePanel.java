@@ -3,7 +3,9 @@ package erp.ui.list;
 import javax.swing.SwingConstants;
 
 import erp.dto.Employee;
+import erp.dto.Title;
 import erp.service.EmployeeService;
+import erp.ui.exception.NotSelectedException;
 
 @SuppressWarnings("serial")
 public class EmployeeTablePanel extends AbstractCustomTablePanel<Employee> {
@@ -40,6 +42,18 @@ public class EmployeeTablePanel extends AbstractCustomTablePanel<Employee> {
 
 	public void setService(EmployeeService service) {
 		this.service = service;
+	}
+
+	@Override
+	public Employee getItem() {
+		int idx = table.getSelectedRow(); // 몇번째 행이 선택되었는가?
+		int empNo = (int) table.getValueAt(idx, 0); // 선택된 행의 첫 번째 열 값 >> 직책번호니까 기본키!
+		
+		// 예외처리
+		if (idx == -1) {
+			throw new NotSelectedException();
+		}
+		return list.get(list.indexOf(new Employee(empNo))); // 그 기본키로 생성한 객체가 list의 몇번째에 있는지 return함
 	}
 
 }

@@ -54,17 +54,20 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	}
 
 	// popup창에서 수정/삭제 누를때 쓰이는 method
-	public T getItem() {
+	public abstract T getItem();
+		
+		/*
 		int idx = table.getSelectedRow(); // 몇번째 행이 선택되었는가?
 		
-//		System.out.println("idx >> " + idx); // 만약 아무 행도 선택되지 않았다면 -1을 return함
 		
 		// 예외처리
 		if (idx == -1) {
 			throw new NotSelectedException();
 		}
 		return list.get(idx);
-	}
+		*/
+		
+		
 	
 	
 	protected JTable getTable() {
