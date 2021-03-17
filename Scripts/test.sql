@@ -17,4 +17,7 @@ select empname, empno from employee e join department d on e.dept = d.deptNo whe
 select password('aaa'), length(password('aaa')) from dual;
 select password('asdfasdgasdhashdsd'), length(password('asdfsadfasdffasdf')) from dual;
 
-select password('1234')
+select * from emp_detail;
+
+delete from emp_detail where empno = 1003;
+

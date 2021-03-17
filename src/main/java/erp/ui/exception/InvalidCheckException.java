@@ -11,4 +11,9 @@ public class InvalidCheckException extends RuntimeException {
 		super("공백이 존재합니다.", cause);
 	}
 
+	public InvalidCheckException(String message) {
+		super(message);
+	}
+
+	
 }

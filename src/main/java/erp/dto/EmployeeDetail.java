@@ -26,6 +26,15 @@ public class EmployeeDetail {
 		this.pic = pic;
 	}
 
+	
+	public EmployeeDetail(int empNo, boolean gender, Date hireDate, String pass, byte[] pic) {
+		this.empNo = empNo;
+		this.gender = gender;
+		this.hireDate = hireDate;
+		this.pass = pass;
+		this.pic = pic;
+	}
+
 	public int getEmpNo() {
 		return empNo;
 	}
@@ -69,7 +78,7 @@ public class EmployeeDetail {
 	@Override
 	public String toString() {
 		return String.format("EmpDetail [empNo=%s, gender=%s, hireDate=%s, pic=%s]", empNo, gender, hireDate,
-				Arrays.toString(pic));
+				pic.length); // pic 배열로 원래 가져왔었는데 길이 너무 길어서 length로 바꿈 
 	}
 	
 }
