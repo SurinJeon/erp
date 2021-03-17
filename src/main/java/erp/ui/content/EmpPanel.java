@@ -176,6 +176,9 @@ public class EmpPanel extends AbstractContentPanel<Employee> implements ItemList
 		cmbManager.setSelectedIndex(-1);
 		cmbTitle.setSelectedIndex(-1);
 		spinSalary.setValue(2000000);
+		if(!tfNo.isEditable()) {
+			tfNo.setEditable(true);
+		}
 
 	}
 

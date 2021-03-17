@@ -75,7 +75,8 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 		btnAdd.addActionListener(this);
 		pBtn.add(btnAdd);
 		
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
 		
 		pList = createTablePanel();

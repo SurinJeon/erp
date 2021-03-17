@@ -45,6 +45,9 @@ public class TitlePanel extends AbstractContentPanel<Title> {
 	public void clearTf() {
 		tfTitleNo.setText("");
 		tfTitleName.setText("");
+		if(!tfTitleNo.isEditable()) {
+			tfTitleNo.setEditable(true);
+		}
 	}
 
 	public JTextField getTfTitleNo() {

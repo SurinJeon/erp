@@ -56,6 +56,9 @@ public class DepartmentPanel extends AbstractContentPanel<Department> {
 		tfDeptNo.setText("");
 		tfDeptName.setText("");
 		tfFloor.setText("");
+		if(!tfDeptNo.isEditable()) {
+			tfDeptNo.setEditable(true);
+		}
 	}
 
 	public JTextField getTfDeptNo() {
