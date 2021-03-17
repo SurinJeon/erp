@@ -21,3 +21,4 @@ select * from emp_detail;
 
 delete from emp_detail where empno = 1003;
 
+select * from employee;
